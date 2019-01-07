@@ -5,11 +5,14 @@ export default () => {
 	let height = 1;
 	let size = 20;
 	let stroke = '#343434';
+	let strokeOpacity = 1.0;
 	let strokeWidth = 2;
 	let background = '';
+	let backgroundOpacity = 1.0;
 	let d = s => `M ${s / 4},${s * 3 / 4}l${s / 4},${-s / 2}l${s / 4},${s / 2}`;
 	let id = rand();
 	let fill = 'transparent';
+	let fillOpacity = 1.0;
 	let shapeRendering = 'auto';
 
 	const path = _ => {
@@ -51,14 +54,17 @@ export default () => {
 				.append('rect')
 					.attr('width', size * width)
 					.attr('height', size * height)
-					.attr('fill', background);
+					.attr('fill', background)
+					.attr('fill-opacity', backgroundOpacity);
 		}
 
 		group
 			.append('path')
 				.attr('d', p)
 				.attr('fill', fill)
+				.attr('fill-opacity', fillOpacity)
 				.attr('stroke', stroke)
+				.attr('stroke-opacity', strokeOpacity)
 				.attr('stroke-width', strokeWidth)
 				.attr('stroke-linecap', 'square')
 				.attr('shape-rendering', shapeRendering);
@@ -105,6 +111,11 @@ export default () => {
 		return $;
 	};
 
+	$.backgroundOpacity = function (_) {
+		backgroundOpacity = _;
+		return $;
+	};
+
 	$.shapeRendering = function (_) {
 		shapeRendering = _;
 		return $;
@@ -125,13 +136,30 @@ export default () => {
 		return $;
 	};
 
+	$.fillOpacity = function (_) {
+		fillOpacity = _;
+		return $;
+	};
+
 	$.stroke = function (_) {
 		stroke = _;
 		return $;
 	};
 
+	$.strokeOpacity = function (_) {
+		strokeOpacity = _;
+		return $;
+	};
+
 	$.strokeWidth = function (_) {
 		strokeWidth = _;
+		return $;
+	};
+
+	$.opacity = function (_) {
+		backgroundOpacity = _;
+		fillOpacity = _;
+		strokeOpacity = _;
 		return $;
 	};
 

@@ -424,3 +424,42 @@ tape(
 		t.end();
 	}
 );
+
+tape(
+	'texture.opacity(0.3) set opacity for everything to 0.3',
+	t => {
+		const {svg, texture} = template();
+		texture.opacity(0.3);
+		svg.call(texture);
+		const path = svg.select('defs').select('pattern').select('path');
+		t.equal(path.attr('stroke-opacity'), '0.3');
+		t.end();
+	}
+);
+
+tape(
+	'texture.strokeOpacity(0.3) set opacity for stroke to 0.3m, but not background',
+	t => {
+		const {svg, texture} = template();
+		texture.strokeOpacity(0.3);
+		texture.background('firebrick');
+		svg.call(texture);
+		const path = svg.select('defs').select('pattern').select('path');
+		t.equal(path.attr('stroke-opacity'), '0.3');
+		t.notEqual(svg.select('defs').select('pattern').select('rect').attr('fill-opacity'), '0.4');
+		t.end();
+	}
+);
+
+tape(
+	'texture.backgroundOpacity(0.4) append a node <rect> with background fill and fillOpacity attr',
+	t => {
+		const {svg, texture} = template();
+		texture.background('firebrick');
+		texture.backgroundOpacity(0.4);
+		svg.call(texture);
+		t.equal(svg.select('defs').select('pattern').select('rect').attr('fill-opacity'), '0.4');
+		t.end();
+	}
+);
+

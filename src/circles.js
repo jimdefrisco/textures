@@ -3,10 +3,13 @@ import rand from './random';
 export default () => {
 	let size = 20;
 	let background = '';
+	let backgroundOpacity = 1.0;
 	let radius = 2;
 	let complement = false;
 	let fill = '#343434';
+	let fillOpacity = 1.0;
 	let stroke = '#343434';
+	let strokeOpacity = 1.0;
 	let strokeWidth = 0;
 	let id = rand();
 
@@ -24,7 +27,8 @@ export default () => {
 				.append('rect')
 					.attr('width', size)
 					.attr('height', size)
-					.attr('fill', background);
+					.attr('fill', background)
+					.attr('fill-opacity', backgroundOpacity);
 		}
 
 		group
@@ -33,7 +37,9 @@ export default () => {
 				.attr('cy', size / 2)
 				.attr('r', radius)
 				.attr('fill', fill)
+				.attr('fill-opacity', fillOpacity)
 				.attr('stroke', stroke)
+				.attr('stroke-opacity', strokeOpacity)
 				.attr('stroke-width', strokeWidth);
 
 		if (complement) {
@@ -45,7 +51,9 @@ export default () => {
 							.attr('cy', corner[1])
 							.attr('r', radius)
 							.attr('fill', fill)
+							.attr('fill-opacity', fillOpacity)
 							.attr('stroke', stroke)
+							.attr('stroke-opacity', strokeOpacity)
 							.attr('stroke-width', strokeWidth);
 				});
 		}
@@ -92,6 +100,11 @@ export default () => {
 		return $;
 	};
 
+	$.backgroundOpacity = function (_) {
+		backgroundOpacity = _;
+		return $;
+	};
+
 	$.size = function (_) {
 		size = _;
 		return $;
@@ -116,13 +129,30 @@ export default () => {
 		return $;
 	};
 
+	$.fillOpacity = function (_) {
+		fillOpacity = _;
+		return $;
+	};
+
 	$.stroke = function (_) {
 		stroke = _;
 		return $;
 	};
 
+	$.strokeOpacity = function (_) {
+		strokeOpacity = _;
+		return $;
+	};
+
 	$.strokeWidth = function (_) {
 		strokeWidth = _;
+		return $;
+	};
+
+	$.opacity = function (_) {
+		backgroundOpacity = _;
+		fillOpacity = _;
+		strokeOpacity = _;
 		return $;
 	};
 

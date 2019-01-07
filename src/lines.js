@@ -3,8 +3,10 @@ import rand from './random';
 export default () => {
 	let size = 20;
 	let stroke = '#343434';
+	let strokeOpacity = 1.0;
 	let strokeWidth = 2;
 	let background = '';
+	let backgroundOpacity = 1.0;
 	let id = rand();
 	let orientation = ['diagonal'];
 	let shapeRendering = 'auto';
@@ -50,7 +52,8 @@ export default () => {
 				.append('rect')
 					.attr('width', size)
 					.attr('height', size)
-					.attr('fill', background);
+					.attr('fill', background)
+					.attr('fill-opacity', backgroundOpacity);
 		}
 
 		orientation
@@ -61,6 +64,7 @@ export default () => {
 						.attr('stroke-width', strokeWidth)
 						.attr('shape-rendering', shapeRendering)
 						.attr('stroke', stroke)
+						.attr('stroke-opacity', strokeOpacity)
 						.attr('stroke-linecap', 'square');
 			});
 	};
@@ -106,6 +110,11 @@ export default () => {
 		return $;
 	};
 
+	$.backgroundOpacity = function (_) {
+		backgroundOpacity = _;
+		return $;
+	};
+
 	$.size = function (_) {
 		size = _;
 		return $;
@@ -129,8 +138,19 @@ export default () => {
 		return $;
 	};
 
+	$.strokeOpacity = function (_) {
+		strokeOpacity = _;
+		return $;
+	};
+
 	$.strokeWidth = function (_) {
 		strokeWidth = _;
+		return $;
+	};
+
+	$.opacity = function (_) {
+		backgroundOpacity = _;
+		strokeOpacity = _;
 		return $;
 	};
 

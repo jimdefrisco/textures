@@ -5,10 +5,13 @@ var rand = (function () {
 var circles = (function () {
 	var size = 20;
 	var background = '';
+	var backgroundOpacity = 1.0;
 	var radius = 2;
 	var complement = false;
 	var fill = '#343434';
+	var fillOpacity = 1.0;
 	var stroke = '#343434';
+	var strokeOpacity = 1.0;
 	var strokeWidth = 0;
 	var id = rand();
 
@@ -16,14 +19,14 @@ var circles = (function () {
 		var group = selection.append('defs').append('pattern').attr('id', id).attr('patternUnits', 'userSpaceOnUse').attr('width', size).attr('height', size);
 
 		if (background) {
-			group.append('rect').attr('width', size).attr('height', size).attr('fill', background);
+			group.append('rect').attr('width', size).attr('height', size).attr('fill', background).attr('fill-opacity', backgroundOpacity);
 		}
 
-		group.append('circle').attr('cx', size / 2).attr('cy', size / 2).attr('r', radius).attr('fill', fill).attr('stroke', stroke).attr('stroke-width', strokeWidth);
+		group.append('circle').attr('cx', size / 2).attr('cy', size / 2).attr('r', radius).attr('fill', fill).attr('fill-opacity', fillOpacity).attr('stroke', stroke).attr('stroke-opacity', strokeOpacity).attr('stroke-width', strokeWidth);
 
 		if (complement) {
 			[[0, 0], [0, size], [size, 0], [size, size]].forEach(function (corner) {
-				group.append('circle').attr('cx', corner[0]).attr('cy', corner[1]).attr('r', radius).attr('fill', fill).attr('stroke', stroke).attr('stroke-width', strokeWidth);
+				group.append('circle').attr('cx', corner[0]).attr('cy', corner[1]).attr('r', radius).attr('fill', fill).attr('fill-opacity', fillOpacity).attr('stroke', stroke).attr('stroke-opacity', strokeOpacity).attr('stroke-width', strokeWidth);
 			});
 		}
 	};
@@ -69,6 +72,11 @@ var circles = (function () {
 		return $;
 	};
 
+	$.backgroundOpacity = function (_) {
+		backgroundOpacity = _;
+		return $;
+	};
+
 	$.size = function (_) {
 		size = _;
 		return $;
@@ -93,13 +101,30 @@ var circles = (function () {
 		return $;
 	};
 
+	$.fillOpacity = function (_) {
+		fillOpacity = _;
+		return $;
+	};
+
 	$.stroke = function (_) {
 		stroke = _;
 		return $;
 	};
 
+	$.strokeOpacity = function (_) {
+		strokeOpacity = _;
+		return $;
+	};
+
 	$.strokeWidth = function (_) {
 		strokeWidth = _;
+		return $;
+	};
+
+	$.opacity = function (_) {
+		backgroundOpacity = _;
+		fillOpacity = _;
+		strokeOpacity = _;
 		return $;
 	};
 
@@ -121,8 +146,10 @@ var circles = (function () {
 var lines = (function () {
 	var size = 20;
 	var stroke = '#343434';
+	var strokeOpacity = 1.0;
 	var strokeWidth = 2;
 	var background = '';
+	var backgroundOpacity = 1.0;
 	var id = rand();
 	var orientation = ['diagonal'];
 	var shapeRendering = 'auto';
@@ -158,11 +185,11 @@ var lines = (function () {
 		var group = selection.append('defs').append('pattern').attr('id', id).attr('patternUnits', 'userSpaceOnUse').attr('width', size).attr('height', size);
 
 		if (background) {
-			group.append('rect').attr('width', size).attr('height', size).attr('fill', background);
+			group.append('rect').attr('width', size).attr('height', size).attr('fill', background).attr('fill-opacity', backgroundOpacity);
 		}
 
 		orientation.forEach(function (o) {
-			group.append('path').attr('d', path(o)).attr('stroke-width', strokeWidth).attr('shape-rendering', shapeRendering).attr('stroke', stroke).attr('stroke-linecap', 'square');
+			group.append('path').attr('d', path(o)).attr('stroke-width', strokeWidth).attr('shape-rendering', shapeRendering).attr('stroke', stroke).attr('stroke-opacity', strokeOpacity).attr('stroke-linecap', 'square');
 		});
 	};
 
@@ -207,6 +234,11 @@ var lines = (function () {
 		return $;
 	};
 
+	$.backgroundOpacity = function (_) {
+		backgroundOpacity = _;
+		return $;
+	};
+
 	$.size = function (_) {
 		size = _;
 		return $;
@@ -234,8 +266,19 @@ var lines = (function () {
 		return $;
 	};
 
+	$.strokeOpacity = function (_) {
+		strokeOpacity = _;
+		return $;
+	};
+
 	$.strokeWidth = function (_) {
 		strokeWidth = _;
+		return $;
+	};
+
+	$.opacity = function (_) {
+		backgroundOpacity = _;
+		strokeOpacity = _;
 		return $;
 	};
 
@@ -259,13 +302,16 @@ var paths = (function () {
 	var height = 1;
 	var size = 20;
 	var stroke = '#343434';
+	var strokeOpacity = 1.0;
 	var strokeWidth = 2;
 	var background = '';
+	var backgroundOpacity = 1.0;
 	var d = function d(s) {
 		return 'M ' + s / 4 + ',' + s * 3 / 4 + 'l' + s / 4 + ',' + -s / 2 + 'l' + s / 4 + ',' + s / 2;
 	};
 	var id = rand();
 	var fill = 'transparent';
+	var fillOpacity = 1.0;
 	var shapeRendering = 'auto';
 
 	var path = function path(_) {
@@ -297,10 +343,10 @@ var paths = (function () {
 		var group = selection.append('defs').append('pattern').attr('id', id).attr('patternUnits', 'userSpaceOnUse').attr('width', size * width).attr('height', size * height);
 
 		if (background) {
-			group.append('rect').attr('width', size * width).attr('height', size * height).attr('fill', background);
+			group.append('rect').attr('width', size * width).attr('height', size * height).attr('fill', background).attr('fill-opacity', backgroundOpacity);
 		}
 
-		group.append('path').attr('d', p).attr('fill', fill).attr('stroke', stroke).attr('stroke-width', strokeWidth).attr('stroke-linecap', 'square').attr('shape-rendering', shapeRendering);
+		group.append('path').attr('d', p).attr('fill', fill).attr('fill-opacity', fillOpacity).attr('stroke', stroke).attr('stroke-opacity', strokeOpacity).attr('stroke-width', strokeWidth).attr('stroke-linecap', 'square').attr('shape-rendering', shapeRendering);
 	};
 
 	$.heavier = function (_) {
@@ -344,6 +390,11 @@ var paths = (function () {
 		return $;
 	};
 
+	$.backgroundOpacity = function (_) {
+		backgroundOpacity = _;
+		return $;
+	};
+
 	$.shapeRendering = function (_) {
 		shapeRendering = _;
 		return $;
@@ -364,13 +415,30 @@ var paths = (function () {
 		return $;
 	};
 
+	$.fillOpacity = function (_) {
+		fillOpacity = _;
+		return $;
+	};
+
 	$.stroke = function (_) {
 		stroke = _;
 		return $;
 	};
 
+	$.strokeOpacity = function (_) {
+		strokeOpacity = _;
+		return $;
+	};
+
 	$.strokeWidth = function (_) {
 		strokeWidth = _;
+		return $;
+	};
+
+	$.opacity = function (_) {
+		backgroundOpacity = _;
+		fillOpacity = _;
+		strokeOpacity = _;
 		return $;
 	};
 
