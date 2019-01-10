@@ -42,7 +42,6 @@ export default () => {
 	const $ = selection => {
 		const p = path(d);
 		const group = selection
-			.append('defs')
 			.append('pattern')
 				.attr('id', id)
 				.attr('patternUnits', 'userSpaceOnUse')

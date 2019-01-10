@@ -16,7 +16,7 @@ var circles = (function () {
 	var id = rand();
 
 	var $ = function $(selection) {
-		var group = selection.append('defs').append('pattern').attr('id', id).attr('patternUnits', 'userSpaceOnUse').attr('width', size).attr('height', size);
+		var group = selection.append('pattern').attr('id', id).attr('patternUnits', 'userSpaceOnUse').attr('width', size).attr('height', size);
 
 		if (background) {
 			group.append('rect').attr('width', size).attr('height', size).attr('fill', background).attr('fill-opacity', backgroundOpacity);
@@ -182,7 +182,7 @@ var lines = (function () {
 	};
 
 	var $ = function $(selection) {
-		var group = selection.append('defs').append('pattern').attr('id', id).attr('patternUnits', 'userSpaceOnUse').attr('width', size).attr('height', size);
+		var group = selection.append('pattern').attr('id', id).attr('patternUnits', 'userSpaceOnUse').attr('width', size).attr('height', size);
 
 		if (background) {
 			group.append('rect').attr('width', size).attr('height', size).attr('fill', background).attr('fill-opacity', backgroundOpacity);
@@ -340,7 +340,7 @@ var paths = (function () {
 
 	var $ = function $(selection) {
 		var p = path(d);
-		var group = selection.append('defs').append('pattern').attr('id', id).attr('patternUnits', 'userSpaceOnUse').attr('width', size * width).attr('height', size * height);
+		var group = selection.append('pattern').attr('id', id).attr('patternUnits', 'userSpaceOnUse').attr('width', size * width).attr('height', size * height);
 
 		if (background) {
 			group.append('rect').attr('width', size * width).attr('height', size * height).attr('fill', background).attr('fill-opacity', backgroundOpacity);
